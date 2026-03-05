@@ -20,7 +20,7 @@ def get_file_content(working_directory, file_path):
         
         return content
     except Exception as e:
-        return f"Error listing files: {e}"
+        return f"Error listing file: {e}"
         
     
 
