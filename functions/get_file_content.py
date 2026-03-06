@@ -1,9 +1,10 @@
 import os
 from config import MAX_CHARS
+from google.genai import types
 
 def get_file_content(working_directory, file_path):
     try:
-        abs_working_dir  = os.path.abspath(working_directory)
+        abs_working_dir = os.path.abspath(working_directory)
         target_file = os.path.normpath(os.path.join(abs_working_dir, file_path))
         valid_target_file = os.path.commonpath([abs_working_dir, target_file]) == abs_working_dir
         valid_file = os.path.isfile(target_file)
@@ -22,6 +23,19 @@ def get_file_content(working_directory, file_path):
     except Exception as e:
         return f"Error listing file: {e}"
         
-    
 
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="List file content from a specified file path, providing file content",
+    parameters=types.Schema(
+        required=["file_path"],
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="file path to list file from, relative to the working directory",
+            ),
+        },
+    ),
+)
     
