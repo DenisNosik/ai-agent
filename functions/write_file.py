@@ -27,8 +27,7 @@ schema_write_file = types.FunctionDeclaration(
     name="write_file",
     description="Write content to file in a specified directory relative to the working directory",
     parameters=types.Schema(
-        required=["file_path"],
-        required=["content"],
+        required=["file_path", "content"],
         type=types.Type.OBJECT,
         properties={
             "file_path": types.Schema(

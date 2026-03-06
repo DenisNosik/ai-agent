@@ -33,7 +33,7 @@ def run_python_file(working_directory, file_path, args=None):
         if completed_process.stdout:
             output.append(f"STDOUT:\n{completed_process.stdout}")
         if completed_process.stderr:
-            output.append("STDERR:\n {completed_process.stderr}")
+            output.append(f"STDERR:\n{completed_process.stderr}")
         
         return "\n".join(output)
     
@@ -53,13 +53,10 @@ schema_run_python_file = types.FunctionDeclaration(
                 description="file path to list file from, relative to the working directory",
             ),
             "args": types.Schema(
-                types.Type.ARRAY,
+                type=types.Type.ARRAY,
                 description="list of arguments for command subprocess",
+                items=types.Schema(type=types.Type.STRING),
             ),
-            "arg": types.Schema(
-                types.Type.STRING,
-                description="argument from args list",
-            )
         },
     ),
 )
